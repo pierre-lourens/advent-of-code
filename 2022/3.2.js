@@ -10,13 +10,16 @@ for (let i = 0; i < lines.length; i += 3) {
   }
   const second = lines[i + 1].split('');
   const third = lines[i + 2].split('');
-  record = record.filter((letter) => {
-    // letter has to be in 2nd and 3rd line
+
+  for (let letter of record) {
     const inSecond = second.some((let) => let === letter);
     const inThird = third.some((let) => let === letter);
-    return inSecond && inThird;
-  });
-  const letter = record[0];
+    if (inSecond && inThird) {
+      record = letter;
+      break;
+    }
+  }
+  const letter = record;
   const code = letter.charCodeAt(0);
   let priority;
   if (code >= 97) {
